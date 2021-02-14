@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+header {
+	padding: 30px 40px;
+	text-align: center;
+}
+h2{
+	font-family: monospace,cursive;
+	letter-spacing: 3px;
+	margin-bottom: 20px;
+}
+input{
+	width: 50% ;
+	font-family: cursive;
+	padding: 10px;
+	font-size: 15px;
+	margin-right: 0;
+}
+.button
+{
+	width: 25%;
+	padding: 10px;
+	margin-left: 0;
+	background: #A8A8A8;
+	color: #000000;
+	text-align: center;
+	font-size: 15px;
+	cursor: pointer;
+	transition: 0.5s;
+	font-family: cursive;
+	font-weight: bold;
+	border-style: groove;
+	border-radius: 10px;
+}
+
+.button:hover {
+	background-color: #bbb;
+	color: #fff;
+}
+
+#dolist {
+	width: 45%;
+	margin: 0 auto;
+	background:#eee;
+}
+
+#livelist {
+	width: 45%;
+	margin: 0 auto;
+	background:#fed8b1;	
+}
+
+#donelist {
+	width: 45%;
+	margin: 0 auto;
+	background:#80ff80;
+}
+
+li{
+	text-align: left;
+	font-family: cursive;	
+}
+
+.Start
+{
+	text-align: right;
+	background: #fed8b1;
+	margin-left: 0;
+	color: #000000;
+	cursor: pointer;
+	transition: 0.5s;
+	font-family: cursive;
+	font-weight: bold;
+	border-style: groove;
+	border-radius: 10px;
+	float: right;
+	
+
+}
+
+.Start:hover 
+{
+	background-color: #bbb;
+	color: #fff;
+}
+
+.Remove
+{
+	text-align: right;
+	background: #cd5c5c;
+	margin-left: 5px;
+	color: #000000;
+	cursor: pointer;
+	transition: 0.5s;
+	font-family: cursive;
+	font-weight: bold;
+	border-style: groove;
+	border-radius: 10px;
+	float: right;
+}
+
+.Remove:hover
+{
+	background-color: #bbb;
+	color: #fff;
+}
+
+.Done
+{
+	text-align: right;
+	background: #80ff80;
+	margin-left: 5px;
+	color: #000000;
+	cursor: pointer;
+	transition: 0.5s;
+	font-family: cursive;
+	font-weight: bold;
+	border-style: groove;
+	border-radius: 10px;
+	float: right;
+	
+}
+
+.Done:hover
+{
+	background-color: #bbb;
+	color: #fff;
+}
+
+
+</style>
+</head>
+<body>
+
+	<header>
+		<h2>TODO List</h2>
+		<input type="text" id="input_box" placeholder="Write your task...">
+		<span onclick="newitem()" class="button" id="add">Add</span>
+	</header>
+	<ul id="dolist">
+	</ul>
+	<header>
+	<h2>Working...</h2>
+	<header>
+	<ul id="livelist">
+	</ul>
+	<header>
+		<h2>Done!!</h2>
+	</header>
+	<ul id="donelist">
+		
+	</ul>
+
+<script>
+
+//Function called when add button clicked
+function newitem() {
+
+//new list item created and added to todo list
+  var lit = document.createElement("li");
+  var inputValue = document.getElementById("input_box").value;
+  var t = document.createTextNode(inputValue);
+  lit.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("dolist").appendChild(lit);
+  }
+  document.getElementById("input_box").value = "";
+
+//start button added to todo list 
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("Start");
+  span.className = "Start";
+  span.appendChild(txt);
+  span.onclick = function() {
+  	var parent= this.parentElement;
+    text=parent.firstChild;
+    var liw = document.createElement("li");
+    liw.appendChild(text);
+    document.getElementById("livelist").appendChild(liw);
+    //done button added to working list
+    var span = document.createElement("SPAN");
+  	var txt = document.createTextNode("Done");
+  	span.className = "Done";
+  	span.appendChild(txt);
+  	span.onclick= function() {
+  		var parent =this.parentElement;
+  		text=parent.firstChild;
+    	var lid = document.createElement("li");
+    	lid.appendChild(text);
+    	document.getElementById("donelist").appendChild(lid);
+    	//remove button added to done list
+    	var span = document.createElement("SPAN");
+  		var txt = document.createTextNode("Remove");
+  		span.className = "Remove";
+  		span.appendChild(txt);
+  		span.onclick= function() {
+  			var parent= this.parentElement;
+  			parent.style.display = "none";
+  		}
+  		lid.appendChild(span);
+
+  		parent.style.display = "none";
+  	}
+  	liw.appendChild(span);
+  	//remove button added to working list
+  	var span = document.createElement("SPAN");
+  	var txt = document.createTextNode("Remove");
+  	span.className = "Remove";
+  	span.appendChild(txt);
+  	span.onclick= function() {
+  		var parent= this.parentElement;
+  		parent.style.display = "none";
+  	}
+  	liw.appendChild(span);
+
+
+    parent.style.display = "none";
+  }
+
+  lit.appendChild(span);
+//remove button added to todo list
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("Remove");
+  span.className = "Remove";
+  span.appendChild(txt);
+  span.onclick= function() {
+  	var parent= this.parentElement;
+  	parent.style.display = "none";
+  }
+  lit.appendChild(span);
+}
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
